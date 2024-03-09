@@ -64,7 +64,8 @@ def get_google_analytics_data(view_id, ga_api_key):
             return None
 
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching Google Analytics data: {e}")
+        # Remove or comment out the print statement below
+        # print(f"Error fetching Google Analytics data: {e}")
         return None
 
 
@@ -101,7 +102,8 @@ def get_social_media_data(platform, access_token):
             }
 
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching social media data: {e}")
+            # Remove or comment out the print statement below
+            # print(f"Error fetching social media data: {e}")
             return None
 
     else:
@@ -135,7 +137,9 @@ def get_website_details(url):
             pass
         return result
     else:
-        print(f"Error: Unable to fetch the website. Status code: {response.status_code}")
+        # Remove or comment out the print statement below
+        # print(f"Error: Unable to fetch the website. Status code: {response.status_code}")
+        return None
 
 # Function to generate model response
 def generate_response(query):

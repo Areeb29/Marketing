@@ -28,6 +28,9 @@ if response.status_code == 202:
     print('Query ID:', query_id)
     print('Waiting for response...')
 
+    # Variable to keep track of waiting message
+    waiting_message_shown = False
+
     while True:
         response = requests.get(f"{base_url}/response?query_id={query_id}")
         if response.status_code == 200:
@@ -38,8 +41,11 @@ if response.status_code == 202:
                 break
             else:
                 print("No response received yet, waiting...")
+                waiting_message_shown = True
         elif response.status_code == 202:
-            print("Response not ready yet, waiting...")
+            if not waiting_message_shown:
+                print("Response not ready yet, waiting...")
+                waiting_message_shown = True
         else:
             print(f"Error retrieving response: {response.status_code}")
         time.sleep(5)
@@ -60,6 +66,9 @@ if response.status_code == 202:
     print('Query ID:', query_id)
     print('Waiting for text generation response...')
 
+    # Reset waiting message flag
+    waiting_message_shown = False
+
     while True:
         response = requests.get(f"{base_url}/response?query_id={query_id}")
         if response.status_code == 200:
@@ -70,8 +79,11 @@ if response.status_code == 202:
                 break
             else:
                 print("No text generation response received yet, waiting...")
+                waiting_message_shown = True
         elif response.status_code == 202:
-            print("Response not ready yet, waiting...")
+            if not waiting_message_shown:
+                print("Response not ready yet, waiting...")
+                waiting_message_shown = True
         else:
             print(f"Error retrieving text generation response: {response.status_code}")
         time.sleep(5)
